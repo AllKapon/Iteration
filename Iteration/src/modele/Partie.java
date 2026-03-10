@@ -39,7 +39,7 @@ public abstract class Partie {
         for (int i = 0; i < ligne; i++) {
             for (int j = 0; j < colonne; j++) {
 
-                // j'ai regardé avec IA comment voir les cases vide
+                // On a regardé avec IA comment voir les cases vide
                 if (grille[i][j] == '\0') {
                     return false;
                 }

@@ -11,16 +11,15 @@ public class Controleur {
     }
 
     public void lancerJeu() {
-        // 1. Demander les noms et créer les joueurs
+        // demande d'information aux joueurs
         String nomJ1 = ihm.demanderLeNom(1);
         String nomJ2 = ihm.demanderLeNom(2);
         Joueur joueur1 = new Joueur(nomJ1);
         Joueur joueur2 = new Joueur(nomJ2);
 
-        // 2. Demander le choix du jeu
         int choix = ihm.demanderChoixJeu();
 
-        // 3. Boucle de parties
+        // boucle de la partie
         boolean rejouer = true;
         while (rejouer) {
             Partie partie;
@@ -61,7 +60,7 @@ public class Controleur {
             rejouer = ihm.demanderRejouer();
         }
 
-        // 4. Afficher scores finaux
+        // affichage des resultats finales
         ihm.afficherScores(nomJ1, nomJ2,
                 joueur1.getNbPartiesGagnees(),
                 joueur2.getNbPartiesGagnees());
