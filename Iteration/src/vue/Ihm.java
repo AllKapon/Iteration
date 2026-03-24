@@ -22,16 +22,32 @@ public class Ihm {
     }
 
     public CoupMorpion demanderCoupMorpion(String nomJoueur){
-        System.out.println(nomJoueur + " a votre tour de jouer (ligne, colonne) : ");
-        int x = sc.nextInt();
-        int y = sc.nextInt();
-        return  new CoupMorpion(x-1, y-1);
+        System.out.println(nomJoueur + " à votre tour (ligne colonne) : ");
+        try {
+            int x = sc.nextInt();
+            int y = sc.nextInt();
+            return new CoupMorpion(x-1, y-1);
+        } catch (Exception e) {
+            sc.nextLine();
+            System.out.println("Saisie invalide !");
+            return null;
+        }
     }
 
-    public CoupPuissance4 demanderCoupPuissance4(String nomJoueur){
-        System.out.println(nomJoueur + " : votre tour de joeur le coup (colonne) : ");
-        int colonne = sc.nextInt() - 1;
-        return new CoupPuissance4(colonne);
+    public void afficherCoupInvalide() {
+        System.out.println("Coup invalide, réessayez !");
+    }
+
+    public CoupPuissance4 demanderCoupPuissance4(String nomJoueur) {
+        System.out.println(nomJoueur + " : votre tour de jouer le coup (colonne 1-7) : ");
+        try {
+            int colonne = sc.nextInt() - 1;
+            return new CoupPuissance4(colonne);
+        } catch (Exception e) {
+            sc.nextLine();
+            System.out.println("Saisie invalide !");
+            return null;
+        }
     }
 
     public void afficherGagnant(String nomJoueur){
@@ -47,8 +63,15 @@ public class Ihm {
     public void afficherGrille(char[][] grille) {
         for (int i = 0; i < grille.length; i++) {
             for (int j = 0; j < grille[i].length; j++) {
-                char c = grille[i][j] == '\0' ? '.' : grille[i][j];
-                System.out.print(c + " ");
+                if (grille[i][j] == 'B') {
+                    System.out.print("\u001B[34m●\u001B[0m ");
+                } else if (grille[i][j] == 'R') {
+                    System.out.print("\u001B[31m●\u001B[0m ");
+                } else if (grille[i][j] == '\0') {
+                    System.out.print(". ");
+                } else {
+                    System.out.print(grille[i][j] + " "); // X et O
+                }
             }
             System.out.println();
         }
@@ -66,5 +89,21 @@ public class Ihm {
 
     public void afficherNul() {
         System.out.println("Partie nulle !");
+    }
+
+    public boolean demanderModeJeu(){
+        System.out.println("1 - Jouer à deux joueurs");
+        System.out.println("2 - Jouer contre IA");
+        int choix = sc.nextInt();
+        sc.nextLine();
+        return choix == 2;
+    }
+
+    public void afficherTourJoueur(String nomJoueur){
+        System.out.println("--- Tour de joueur " + nomJoueur + " ---");
+    }
+
+    public void afficherTourIA(){
+        System.out.println("--- Tour de IA ---");
     }
 }

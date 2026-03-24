@@ -5,6 +5,7 @@ public class Morpion extends Partie{
     private char symboleJ1 = 'X';
     private char symboleJ2 = 'O';
 
+
     public Morpion(Joueur joueur1, Joueur joueur2){
         super(joueur1, joueur2, 3, 3);
     }
