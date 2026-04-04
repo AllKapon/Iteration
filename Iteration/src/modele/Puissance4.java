@@ -112,10 +112,14 @@ public class Puissance4 extends Partie{
         return false;
     }
 
-    public void activerIA(){
-        this.IA = new IAPuissance4(this);
+    @Override
+    public void activerIA(boolean difficile) {
+        if (difficile) {
+            this.IA = new IAPuissance4Difficile(this);
+        } else {
+            this.IA = new IAPuissance4Facile(this);
+        }
     }
-
     @Override
     public boolean aUneIA() {
         return IA != null;

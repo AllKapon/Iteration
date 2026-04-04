@@ -34,13 +34,19 @@ public class Controleur {
         while (rejouer) {
             Partie partie;
 
+            // Demander le niveau avant chaque partie
+            boolean niveauIA = false;
+            if (contreIA) {
+                niveauIA = ihm.demanderNiveau();
+            }
+
             if (choix == 1) {
                 Morpion morpion = new Morpion(joueur1, joueur2);
-                if (contreIA) morpion.activerIA();
+                if (contreIA) morpion.activerIA(niveauIA);
                 partie = morpion;
             } else {
                 Puissance4 puissance4 = new Puissance4(joueur1, joueur2);
-                if (contreIA) puissance4.activerIA();
+                if (contreIA) puissance4.activerIA(niveauIA);
                 partie = puissance4;
             }
 

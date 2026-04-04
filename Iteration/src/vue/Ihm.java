@@ -107,4 +107,13 @@ public class Ihm {
     public void afficherTourIA(){
         System.out.println("--- Tour de IA ---");
     }
+
+    public boolean demanderNiveau() {
+        System.out.println("Choisissez le niveau : ");
+        System.out.println("1 - Facile");
+        System.out.println("2 - Difficile");
+        int choix = sc.nextInt();
+        sc.nextLine();
+        return choix == 2;
+    }
 }

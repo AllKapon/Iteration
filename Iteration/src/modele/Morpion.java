@@ -61,8 +61,12 @@ public class Morpion extends Partie{
         return false;
     }
 
-    public void activerIA(){
-        this.IA = new IAMorpion(this);
+    @Override
+    public void activerIA(boolean difficile){
+        if(difficile)
+            this.IA = new IAMorpionDifficile(this);
+        else
+            this.IA = new IAMorpionFacile(this);
     }
 
     @Override

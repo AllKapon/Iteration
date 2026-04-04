@@ -29,6 +29,8 @@ public abstract class Partie {
     // pour l'IA
     public abstract boolean aUneIA();
 
+    public abstract void activerIA(boolean difficile);
+
     public abstract Coup getCoupIA();
 
     public boolean estTerminee() {
