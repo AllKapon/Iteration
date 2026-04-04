@@ -26,6 +26,10 @@ public abstract class Partie {
 
     public abstract boolean aUnGagnant();
 
+    // pour l'IA
+    public abstract boolean aUneIA();
+
+    public abstract Coup getCoupIA();
 
     public boolean estTerminee() {
         return aUnGagnant() || estGrillePleine();

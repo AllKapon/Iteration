@@ -4,6 +4,7 @@ public class Puissance4 extends Partie{
 
     private char symboleJ1 = 'B';
     private char symboleJ2 = 'R';
+    private IAPuissance4 IA;
 
     public Puissance4(Joueur joueur1,  Joueur joueur2){
         super(joueur1, joueur2, 6, 7);
@@ -111,4 +112,17 @@ public class Puissance4 extends Partie{
         return false;
     }
 
+    public void activerIA(){
+        this.IA = new IAPuissance4(this);
+    }
+
+    @Override
+    public boolean aUneIA() {
+        return IA != null;
+    }
+
+    @Override
+    public Coup getCoupIA(){
+        return  IA.choisirCoup();
+    }
 }

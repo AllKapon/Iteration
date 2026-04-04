@@ -102,13 +102,12 @@ public class IAMorpion {
                 }
             }
         }
-
         return null;
     }
 
     public int minMax(boolean estTourIA){
-        int meilleurScore = -2; // ou +2 selon le bloc
-        int score;
+        int meilleurScore = -2;
+        int score = 0;
 
         if(morpion.aUnGagnant() && !estTourIA) return +1;
 

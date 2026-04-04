@@ -5,6 +5,7 @@ public class Morpion extends Partie{
     private char symboleJ1 = 'X';
     private char symboleJ2 = 'O';
 
+    private IAMorpion IA;
 
     public Morpion(Joueur joueur1, Joueur joueur2){
         super(joueur1, joueur2, 3, 3);
@@ -58,5 +59,19 @@ public class Morpion extends Partie{
             return true;
 
         return false;
+    }
+
+    public void activerIA(){
+        this.IA = new IAMorpion(this);
+    }
+
+    @Override
+    public boolean aUneIA(){
+        return IA != null;
+    }
+
+    @Override
+    public Coup getCoupIA(){
+        return IA.choisirCoup();
     }
 }

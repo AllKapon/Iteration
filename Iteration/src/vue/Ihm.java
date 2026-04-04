@@ -91,6 +91,7 @@ public class Ihm {
         System.out.println("Partie nulle !");
     }
 
+    // demander mode de jeu -> contre IA ou joueur
     public boolean demanderModeJeu(){
         System.out.println("1 - Jouer à deux joueurs");
         System.out.println("2 - Jouer contre IA");
@@ -98,11 +99,11 @@ public class Ihm {
         sc.nextLine();
         return choix == 2;
     }
-
+/*
     public void afficherTourJoueur(String nomJoueur){
         System.out.println("--- Tour de joueur " + nomJoueur + " ---");
     }
-
+*/
     public void afficherTourIA(){
         System.out.println("--- Tour de IA ---");
     }

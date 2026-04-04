@@ -3,8 +3,6 @@ package controleur;
 import modele.*;
 import vue.Ihm;
 
-import javax.swing.*;
-
 public class Controleur {
     private Ihm ihm;
 
@@ -13,57 +11,51 @@ public class Controleur {
     }
 
     public void lancerJeu() {
-        // Demander Mode du jeu
-        boolean choixMode = ihm.demanderModeJeu();
+        // Demander le mode
+        boolean contreIA = ihm.demanderModeJeu();
 
-        // Demander les noms et créer les joueurs
+        // Demander les noms
         String nom1 = ihm.demanderLeNom(1);
         Joueur joueur1 = new Joueur(nom1);
         Joueur joueur2;
 
-        if(!choixMode){
+        if (!contreIA) {
             String nom2 = ihm.demanderLeNom(2);
             joueur2 = new Joueur(nom2);
-        }
-        else{
+        } else {
             joueur2 = new Joueur("IA");
         }
 
         // Demander le choix du jeu
         int choix = ihm.demanderChoixJeu();
 
-        // Boucle de partie
+        // Boucle de parties
         boolean rejouer = true;
         while (rejouer) {
             Partie partie;
-            IAMorpion IAmorpion = null;
-            IAPuissance4 IApuissance4 = null;
 
             if (choix == 1) {
-                partie = new Morpion(joueur1, joueur2);
-                IAmorpion = new IAMorpion((Morpion) partie);
+                Morpion morpion = new Morpion(joueur1, joueur2);
+                if (contreIA) morpion.activerIA();
+                partie = morpion;
             } else {
-                partie = new Puissance4(joueur1, joueur2);
-                IApuissance4 = new IAPuissance4((Puissance4) partie);
+                Puissance4 puissance4 = new Puissance4(joueur1, joueur2);
+                if (contreIA) puissance4.activerIA();
+                partie = puissance4;
             }
 
             // Boucle d'une partie
             while (!partie.estTerminee()) {
-                Coup coup = null;
                 ihm.afficherGrille(partie.getGrille());
 
-                if(choixMode && partie.getJoueurCourant() == joueur2){
-                    if(choix == 1) {
-                        ihm.afficherTourIA();
-                        coup = IAmorpion.choisirCoup();
-                    }
-                    else {
-                        ihm.afficherTourIA();
-                        coup = IApuissance4.choisirCoup();
-                    }
-                }
-                else {
-                    // Demander un coup valide
+                Coup coup = null;
+
+                // Si c'est le tour de l'IA
+                if (contreIA && partie.getJoueurCourant() == joueur2) {
+                    ihm.afficherTourIA();
+                    coup = partie.getCoupIA();
+                } else {
+                    // Demander un coup valide au joueur humain
                     while (coup == null || !partie.verifierCoup(coup)) {
                         if (choix == 1) {
                             coup = ihm.demanderCoupMorpion(partie.getJoueurCourant().getNom());
@@ -75,6 +67,7 @@ public class Controleur {
                         }
                     }
                 }
+
                 partie.jouerCoup(coup);
 
                 if (partie.aUnGagnant()) {
@@ -93,7 +86,7 @@ public class Controleur {
             rejouer = ihm.demanderRejouer();
         }
 
-        // Afficher resultats finales
+        // Afficher scores finaux
         ihm.afficherScores(joueur1.getNom(), joueur2.getNom(),
                 joueur1.getNbPartiesGagnees(),
                 joueur2.getNbPartiesGagnees());
